@@ -1,0 +1,163 @@
+
+.form-horizontal .control-label-left {
+    padding-top: 7px;
+    margin-bottom: 0;
+    text-align: left;
+}
+
+
+.text-strong {
+	font-weight: bold;
+}
+
+input[placeholder] {
+	font-weight: normal;
+	/*color: #ebebeb;*/
+}
+
+input[readonly], input[readonly="readonly"],
+textarea[readonly], textarea[readonly="readonly"]
+{
+    border: 0.5px solid #ebebeb;
+    color: #4a4a4a;
+}
+
+.table > thead > tr > th {
+	vertical-align: top;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+}
+
+body {
+	font-family: 'Calibri'; /*Segoe UI*/
+}
+
+/*  Problem in select2 plugin which overlays the options behind a modal resolved */
+.select2-drop-active {
+  z-index: 100000;
+}
+
+.form-horizontal .control-label {
+    text-align: left;
+}
+
+.page-title {
+    font-weight: normal;
+}
+
+.card-box {
+    padding: 10px;
+}
+
+.custombox-modal-wrapper {
+    text-align: left;
+}
+
+.widget-user .wid-u-info {
+    margin-left: 110px;
+}
+
+.widget-user img {
+    height: 92px;
+    float: left;
+}
+
+.btn-icon > i {
+    float: left;
+    padding: 3px 3px 0px 0px;
+}
+
+.panel-footer {
+    background-color: #fff !important;
+    border-top: 1px solid #ddd;
+}
+
+
+.prev_sign, .next_sign,
+.week_name > td {
+    width: 14.28571428571429%;
+}
+
+.table-eis th {
+    text-align: center;
+    font-family: 'Segoe UI';
+    font-size: 12px;
+}
+
+.table-eis td {
+    font-size: 16px;
+}
+
+tr.s-12 th {
+    font-size: 12px;
+}
+
+.month_sign {
+    font-size: 20px;
+}
+
+.week_name {
+    text-align: center;
+    font-weight: bold;
+}
+
+.activity {
+    color: #ea1c1c;
+    font-weight: bolder;
+}
+
+.activity:hover {
+    color: #007afe;
+}
+
+.switchery {
+    width: 100% !important;
+}
+
+.logo-alt-box {
+    margin-top: 2% !important;
+}
+
+.text-middle {
+    vertical-align: middle !important;
+}
+
+#sidebar-menu {
+    padding-top: 0px;
+}
+
+.panel-tabs .nav-pills li a {
+    color: #2d2d2d !important;
+}
+
+.p-l-15 {
+    padding-left: 15px !important;
+}
+
+.tbody-p-l-20 > tr > td:first-child{
+    padding-left: 20px !important;
+}
+
+.col-md-20 {
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+@media (min-width: 992px) {
+    .col-md-20 {
+        float: left;
+        width: 20%;
+    }
+}
+
+.col-md-20:first-child {
+    padding-left: 10px;
+}
+
+.col-md-20:last-child {
+    padding-right: 10px;
+}

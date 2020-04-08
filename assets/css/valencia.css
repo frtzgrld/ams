@@ -1,0 +1,78 @@
+
+.workflow-procedure .done {
+	background: #5cc862;
+}
+
+.workflow-procedure .current {
+	background: #53b46c;
+}
+
+.workflow-procedure .pending {
+	background: #c6c6c6;
+}
+
+.workflow-procedure > td > a > i.zmdi-assignment-check {
+	color: #53b46c;
+	font-size: 16px;
+}
+
+.table-headers > th {
+	text-align: center;
+}
+
+.cell-c-m {
+	text-align: center;
+	vertical-align: middle;
+}
+
+.cell-v {
+	vertical-align: top;
+}
+
+.v-notif-icon {
+	font-size: 100px;
+	padding: 10px;
+}
+
+.v-attach-box {
+	border: 1px solid #ebebeb;
+	border-radius: 3px;
+	padding: 20px;
+	margin-right: 15px;
+	margin-bottom: 15px;
+	color: #cecece;
+	/*width: 140px;*/
+	/*height: 140px;*/
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+	/*font-size: 60px;*/
+}
+
+.v-attach-box {
+
+}
+.m-t-0 {
+	margin-top: -15px;
+}
+
+.specs {
+	font-family: Segoe UI;
+	font-style: italic;
+	color: #797979;
+	border: none;
+	padding-left: 15px;
+	background: unset;
+}
+
+.text-green {
+	color: #20b417;
+}
+
+thead > tr.center > th {
+	text-align: center !important;
+}
+
+thead > tr.upper > th {
+	text-transform: uppercase !important;
+}
