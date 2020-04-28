@@ -56,13 +56,21 @@ Class User_Model extends Authentication_Model
         return $this->resultRow($target_column);
     }
 
-
     public function manage_user_account( $input )
     {
         $this->db->trans_start();
+
+        $query = $this->db->query('SELECT * FROM users');
+
+        $userCount = $query->num_rows()+1;
+        
+        $year = date('Y');
+        $month = date('m');
+
+        $empNo = 'EMP-'.$year.''.$month.'-'.$userCount;
         
         $data = array(
-                'EMPLOYEENO'    => $input['employee'],
+                'EMPLOYEENO'    => $empNo,
                 'FIRSTNAME'     => $input['firstname'],
                 'MIDDLENAME'    => $input['middlename'],
                 'LASTNAME'      => $input['lastname'],

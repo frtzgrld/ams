@@ -47,7 +47,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label-left" for="employee">Employee No: <span class="text-danger">*</span></label>
                                 <div class="col-sm-6">
-                                <input type="text" class="form-control" name="employee" id="employee">
+                                <input type="text" class="form-control" name="employee" id="employee" />
                                 </div>
                                 <div class="col-sm-3 error-message"></div>
                             </div>
@@ -235,10 +235,6 @@
                             maxlength: 11,
                             number: true,
                         },
-                        employee: {
-                            required: true,
-                            maxlength: 30,
-                        },
                         user_group: {
                         	required: true,
                         	maxlength: 11,
@@ -259,7 +255,7 @@
 
                     submitHandler: function() {
                         $.ajax({
-                            url: base_url + 'account/users/validate_users_update',
+                            url: base_url + 'account/users/validate_users',
                             method: 'POST',
                             data: $('#form_user').serialize(),
                             cache: false,
@@ -276,13 +272,6 @@
                                 {
                                     case 'success':
                                         $('#datatable_users').DataTable().ajax.reload(null, true);
-                                        setTimeout(function(){
-                                            swal(response['header'], response['message'], "success");
-                                        },  500 );
-                                        setTimeout(function(){
-                                            if( response['redirect'] )
-                                                window.location.href = response['redirect'];
-                                        },  1000 );
                                         break;
 
                                     default:
