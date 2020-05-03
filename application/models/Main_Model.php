@@ -122,17 +122,16 @@ Class Main_Model extends CI_Model
             return $this->Datatable( $this->activegroup, $data );
 
      */
-    protected function DataTable( $database=null, $data=array(), $aggregate=null )
+    protected function DataTable( $database=null, $data=array() )
     {
-		
         $this->db = $this->selectDatabase( $database );
 
         //  Total data set length
         switch ($this->db->dbdriver) 
         {
             case 'mysqli':  
-                $sQuery = "SELECT (SELECT COUNT(".$aggregate." ".$data['index'].") FROM ".$data['object']." ".$data['join']." ".$data['where'].") AS row_count FROM " . $data['object']; 
-				break;
+                $sQuery = "SELECT (SELECT COUNT(".$data['index'].") FROM ".$data['object']." ".$data['where'].") AS row_count FROM " . $data['object']; 
+                break;
 
             case 'sqlsrv':
                 $sQuery = "SELECT COUNT('" . $data['index'] . "') AS row_count FROM " . $data['object'];
@@ -220,18 +219,13 @@ Class Main_Model extends CI_Model
 
             for ($i = 0; $i < count($data['columns']); $i++)
             {
-				
-				if(substr($data['columns'][$i],0,3) != "SUM" && substr($data['columns'][$i],0,3) != "AVG" && substr($data['columns'][$i],0,3) != "MIN" && substr($data['columns'][$i],0,3) != "MAX"   )
-				{
-					$sWhere .= $data['columns'][$i] . " LIKE '%" . $this->db->escape_like_str($sSearchVal) . "%' OR ";
-				}
-
                 if( strpos($data['columns'][$i], ' as ') ) {
                     $aliased = explode(' as ', $data['columns'][$i]);
                     $data['columns'][$i] = $aliased[1];
-				}
-			}
-		
+                }
+
+                $sWhere .= $data['columns'][$i] . " LIKE '%" . $this->db->escape_like_str($sSearchVal) . "%' OR ";
+            }
             $sWhere = substr_replace($sWhere, "", -3);
             $sWhere .= ')';
         }
@@ -258,23 +252,22 @@ Class Main_Model extends CI_Model
         }
 
         //  Get data to display
-        $sQuery = "SELECT (SELECT COUNT( ".$aggregate." ".$data['index'].") FROM ".$data['object']." ".$data['where'].") AS row_count, " . str_replace(" , ", " ", implode(", ", $data['columns'])) . " FROM " . $data['object']." ".$data['join']." ".(str_replace('+', ' ', $sWhere))." ".$data['group']." ".$sOrder." ".$sLimit;
-		
+        $sQuery = "SELECT (SELECT COUNT(".$data['index'].") FROM ".$data['object']." ".$data['where'].") AS row_count, " . str_replace(" , ", " ", implode(", ", $data['columns'])) . " FROM " . $data['object']." ".$data['join']." ".(str_replace('+', ' ', $sWhere))." ".$data['group']." ".$sOrder." ".$sLimit;
+
         // echo $sQuery; die();
 
         $rResult = $this->db->query($sQuery);
-		
+
         //  Data set length after filtering
         $rResultFilterTotal = $this->db->query($sQuery);
-		
+
         if( $rResultFilterTotal->num_rows() > 0 )
             $iFilteredTotal = $rResultFilterTotal->row()->row_count;
         else
             $iFilteredTotal = 0;
 
         //  Output
-		$sEcho = $this->input->get_post('draw', true);
-		
+        $sEcho = $this->input->get_post('draw', true);
         $output = array(
             "draw" => intval($sEcho),
             "recordsTotal" => $iTotal,
@@ -288,8 +281,6 @@ Class Main_Model extends CI_Model
             
             foreach ($data['columns'] as $col) 
             {
-				
-				
                 if( strpos( $col, ' AS ') )
                 {
                     $aliased = explode(' AS ', $col);
@@ -297,7 +288,6 @@ Class Main_Model extends CI_Model
                 } 
                 else 
                 {
-					
                     if( strpos($col, '.') ) {
                         $prefixed = explode('.', $col);
                         $col = $prefixed[1];
@@ -309,11 +299,9 @@ Class Main_Model extends CI_Model
 
                 $row[] = $aRow[$col];
             }
-			$output['data'][] = $row;
-			
+            $output['data'][] = $row;
         }
-		// var_dump($output['data']);
-		// exit();
+
         return $output;
     }
 

@@ -138,7 +138,7 @@
         <script src="<?php echo base_url(); ?>assets/js/jquery.core.js"></script>
         <script src="<?php echo base_url(); ?>assets/js/jquery.app.js"></script>
         <script src="<?php echo base_url(); ?>assets/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/js/eis/form_login_validation.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/ams/form_login_validation.js"></script>
 
 	</body>
 
