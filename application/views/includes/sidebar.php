@@ -48,7 +48,7 @@
 
                             endif;
                             
-                            if( has_access("'RARE','RRIS','RPEEQ','RSUP','RUSER'") ): ?>
+                            if( has_access('RUSER') ): ?>
 
                             <li class="has_sub">
                                 <a href="javascript:void(0);" class="waves-effect <?php if($menu=='inventory') echo 'subdrop'; ?>"><i class="ti ti-bookmark-alt"></i> <span> Inventory </span> <span class="menu-arrow"></span> </a>
@@ -56,14 +56,14 @@
                                     if( has_access('RPEEQ') ): ?>
 
                                     <li <?php if($submenu=='prop_equip') echo 'class="active"'; ?>>
-                                        <a href="<?php echo base_url();?>inventory/property_and_equipment" <?php if($submenu=='prop_equip') echo 'class="active"'; ?>><span> Properties &amp; Equipments </span></a>
+                                        <a href="<?php echo base_url();?>properties_and_equipment/" <?php if($submenu=='prop_equip') echo 'class="active"'; ?>><span> Properties &amp; Equipments </span></a>
                                     </li><?php
 
                                     endif;
                                     if( has_access('RSUP') ): ?>
 
                                     <li <?php if($submenu=='supplies') echo 'class="active"'; ?>>
-                                        <a href="<?php echo base_url();?>inventory/supplies" <?php if($submenu=='supplies') echo 'class="active"'; ?>><span> Supplies </span></a>
+                                        <a href="<?php echo base_url();?>supplies/" <?php if($submenu=='supplies') echo 'class="active"'; ?>><span> Supplies </span></a>
                                     </li><?php
 
                                     endif; ?>
@@ -85,9 +85,7 @@
                                 <a href="javascript:void(0);" class="waves-effect <?php if($menu=='file') echo 'active subdrop'; ?>"><i class="ti ti-files"></i> <span> File </span> <span class="menu-arrow"></span> </a>
                                 <ul class="list-unstyled" <?php echo ($menu=="file")?'style="display: block;"':'style="display: none;"';  ?>>
 
-                                    <li <?php if($submenu=='are') echo 'class="active"'; ?>>
-                                        <a href="<?php echo base_url();?>file/are" <?php if($submenu=='are') echo 'class="active"'; ?>><span> ARE </span></a>
-                                    </li>
+                                   
 
                                     <li <?php if($submenu=='ris') echo 'class="active"'; ?>>
                                         <a href="<?php echo base_url();?>file/ris" <?php if($submenu=='ris') echo 'class="active"'; ?>><span> RIS </span></a>
