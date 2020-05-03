@@ -303,7 +303,7 @@ CREATE TABLE `ris` (
 
 CREATE TABLE `ris_items` (
   `ID` int(11) NOT NULL,
-  `RIS` int(11) NOT NULL,
+  `RIS_NO` varchar(250) NOT NULL,
   `REQ_STOCK_NO` varchar(50) DEFAULT NULL,
   `REQ_UNIT` varchar(30) DEFAULT NULL,
   `REQ_DESCRIPTION` int(11) DEFAULT NULL COMMENT 'Supply name',
@@ -311,7 +311,9 @@ CREATE TABLE `ris_items` (
   `AVAILABILITY` int(11) NOT NULL,
   `ISSUED_QTY` int(11) DEFAULT NULL,
   `ISSUED_REMARKS` varchar(250) DEFAULT NULL,
-  `ACTIVE` bit(1) DEFAULT b'1'
+  `ACTIVE` bit(1) DEFAULT b'1',
+  `CREATEDDATE` date NOT NULL,
+  `CREATEDBY` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
