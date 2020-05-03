@@ -139,7 +139,7 @@
             </div>
         </div>
 
-        <script src="<?php echo base_url(); ?>assets/js/eis/form_moveto_proc_mode.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/ams/form_moveto_proc_mode.js"></script>
         <script type="text/javascript">
 
             $(document).ready(function () {

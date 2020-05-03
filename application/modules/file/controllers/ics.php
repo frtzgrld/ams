@@ -177,7 +177,7 @@ Class ICS extends Main_Control
 			$current_x += $full-140;
 			$pdf->SetXY($current_x, $current_y);
 
-			$pdf->MultiCell($full-100, $ch, 'VALENCIA', '', 'C');
+			$pdf->MultiCell($full-100, $ch, 'CODEV', '', 'C');
 			$current_x += $full-100;
 			$pdf->SetXY($current_x, $current_y);
 

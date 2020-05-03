@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
         <form id="app_details_save" action="" method="post" class="form-horizontal" role="form">
-        <input type="hidden" name="ris_id" id="ris_id" value="<?php echo $ris_id; ?>">
+        <input type="hidden" name="ris_id" id="ris_id" value="<?php echo $ris_no; ?>">
         
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -38,11 +38,12 @@
 
 <!-- EDIT items -->
 <div id="editcon-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-s">
         <div class="modal-content">
         <form id="period" action="<?php echo base_url(); ?>file/ris/save_quantity" method="post" class="form-horizontal" role="form">
         <input type="hidden" id="ris_item_id" name="ris_item_id" value="">
-        <input type="hidden" id="save_ris_id" name="save_ris_id" value="">
+        <input type="hidden" id="save_ris_id" name="save_ris_id" value="<?php echo $ris_id; ?>">
+		<input type="hidden" id="save_office" name="save_office" value="<?php echo $office_rec; ?>">
         
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -51,7 +52,7 @@
 
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-8">
                         <div class="form-group">
                             <label for="items" class="control-label">Quantity</label>
                             <input type="text" class="form-control" name="req_qty" id="req_qty" value="">
@@ -94,11 +95,11 @@
                         <label class="control-label-left" align="left">Requisition Department:<span class="text-danger">*</span></label>
                     </div>
                     
-                    <div class="col-sm-3" for="createdby" align="left">
+                    <div class="col-sm-3" for="office" align="left">
                         <select name="office" id="office" class="form-control select2" placeholder="Select Office">
                         <option value=""> </option><?php
                         foreach ($offices as $row): ?>
-                            <option value="<?php echo $row['ID'];?>"><?php echo $row['DESCRIPTION'];?></option><?php
+                            <option value="<?php echo $row['ID'];?>"  <?php if($office_rec == $row['ID']) { echo 'selected'; }?> ><?php echo $row['DESCRIPTION'];?></option><?php
                         endforeach; ?>
                         </select>
                     </div>
@@ -195,127 +196,19 @@
 
                 <br/>
                 <br/>
-
-
                 <br/>
-
-                <div class="form-group">
-                    <div class="col-sm-1" align="left">
-                        <label class="control-label-left" align="right"></label>
-                    </div>
-                    <div class="col-sm-2" align="left">
-                        <label class="control-label-left" align="right"></label>
-                    </div>
-                    <div class="col-sm-2" align="left">
-                        <label class="control-label-left" align="right">Requested By:</label>
-                    </div>
-                    
-                   
-                    <div class="col-sm-2" align="left">
-                        <label class="control-label-left" align="right">Noted By:</label>
-                    </div>
-
-                    <div class="col-sm-2" align="left">
-                        <label class="control-label-left" align="right">Approved for Release:</label>
-                    </div>
-
-                </div>
-
-               
-
-                <div class="form-group">
-                    <div class="col-sm-1" align="left">
-                        <label class="control-label-left" align="right"></label>
-                    </div>
-                    <div class="col-sm-2" align="left">
-                        <label class="control-label-left" align="right"></label>
-                    </div>
-                    <div class="col-sm-2" align="left">
-                        <input type="text" class="form-control" name="requested_by" id="requested_by" value="<?php echo $requested_by; ?>">
-                        <br/> Name and Signature
-                    </div>
-                    
-                   
-                    <div class="col-sm-2" align="left">
-                        <input type="text" class="form-control" name="noted_by" id="noted_by" value="<?php echo $noted_by; ?>">
-                        <br/>
-                        Department Head
-                    </div>
-
-                    <div class="col-sm-2" align="left">
-                    <input type="text" class="form-control" name="approved_by" id="approved_by" value="<?php echo $approved_by; ?>">
-                    <br/>
-                    Lanie N. MAcabaya<br/>
-                    Supply Officer III
-                    </div>
-
-                   
-                   
-                </div>
-                <br/><br/>
-
-                <div class="form-group">
-                    <div class="col-sm-1" align="left">
-                        <label class="control-label-left" align="right"></label>
-                    </div>
-                    <div class="col-sm-2" align="left">
-                        <label class="control-label-left" align="right"></label>
-                    </div>
-                    <div class="col-sm-2" align="left">
-                        <label class="control-label-left" align="right">Released By:</label>
-                    </div>
-                    
-                   
-                    <div class="col-sm-2" align="left">
-                        <label class="control-label-left" align="right">Received By:</label>
-                    </div>
-
-                    <div class="col-sm-2" align="left">
-                        <label class="control-label-left" align="right">Posted by:</label>
-                    </div>
-
-                </div>
-
-
-                <div class="form-group">
-                    <div class="col-sm-1" align="left">
-                        <label class="control-label-left" align="right"></label>
-                    </div>
-                    <div class="col-sm-2" align="left">
-                        <label class="control-label-left" align="right"></label>
-                    </div>
-                    <div class="col-sm-2" align="left">
-                        <input type="text" class="form-control" name="issued_by" id="issued_by" value="<?php echo $issued_by; ?>">
-                    </div>
-                    
-                   
-                    <div class="col-sm-2" align="left">
-                        <input type="text" class="form-control" name="received_by" id="received_by" value="<?php echo $received_by; ?>">
-                    </div>
-
-                    <div class="col-sm-2" align="left">
-                    <input type="text" class="form-control" name="posted_by" id="posted_by" value="<?php echo $posted_by; ?>">
-                    </div>
-                </div>
-
                 <hr>
-                
-                    <div class="form-group m-b-0">
-                        <div class="col-sm-offset-7 col-sm-4">
-                            <button type="button" onclick="goBack()" class="btn btn-inverse waves-effect w-md waves-light m-b-5">Back to Item List</button>
-                        <button type="submit" class="btn btn-primary waves-effect w-md waves-light m-b-5">Save</button>
-                        </div>
-                    </div>
                 
             </form>
             
         </div>
     </div><!-- end col -->
 </div>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/eis/validation_are.js"></script>
+
 
 <script type="text/javascript">
 $(document).ready(function () {
+	$('#office').val(<?php echo $office_rec; ?>).trigger('change');
 
                 $('#datatable').dataTable({
                     "processing": true,
@@ -327,7 +220,7 @@ $(document).ready(function () {
                     "order": [[ 0, "asc" ]],
                     "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) 
                     {
-                        var chckbox = '<button class="btn btn-xs btn-block" type="button" onclick="getItem(' + aData[0] +')">SELECT</button>';
+                        var chckbox = '<button class="btn btn-info btn-xs btn-block" type="button" onclick="getItem(' + aData[0] +')">SELECT</button>';
                         // <input type="radio" name="pr_no[]" id="pr_no['+aData[2]+']" value="' + aData[2] + '">';
 
                         /*  The format:
@@ -370,12 +263,13 @@ $(document).ready(function () {
     
     function getItem( id )
     {
+		var risid = $("#ris_id").val();
         $.ajax({
             url: base_url + 'file/ris/save_items',
             method: 'POST',
             cache: false,
             dataType: 'json',
-            data: {item_id: id, ris_id: <?php echo $ris_id; ?>},
+            data: {item_id: id, ris_id: risid},
             async: true,
             error: function(response)
             {
@@ -407,7 +301,7 @@ $(document).ready(function () {
             {
                 $('#req_qty').val( response[0]['REQ_QTY'] );
                 $('#ris_item_id').val( response[0]['ID'] );
-                $('#save_ris_id').val( response[0]['RIS'] );
+                $('#save_ris_id').val( response[0]['RIS_NO'] );
                 jQuery('#editcon-close-modal').modal('show');
             }
         });

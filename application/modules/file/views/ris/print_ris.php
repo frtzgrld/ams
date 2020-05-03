@@ -45,13 +45,13 @@
             <td style="border: 0px;" width="25%">
             </td>
             <td style="width: 5%; border: 0px;">
-                <img src="<?php echo $_SERVER['DOCUMENT_ROOT']?>/asset_management/assets/images/valencia.png" style="width: 70px; height: 65px; vertical-align: text-top">
+                <img src="<?php echo $_SERVER['DOCUMENT_ROOT']?>/asset_management/assets/images/CODEV.png" style="width: 70px; height: 65px; vertical-align: text-top">
                 
             </td>
             <td style=" height: 50px; border: 0px;" align="center">
                 <font style="font-size: 13px; margin-top: -10px; margin-left: 0px; white-space:nowrap; ">Republic of the Philippines</font><br/>
                 <font style="font-size: 12px;  white-space:nowrap;">Province of Bukidnon</font><br/>
-                <font style="font-size: 13px;  white-space:nowrap;">CITY OF VALENCIA</font>
+                <font style="font-size: 13px;  white-space:nowrap;">CITY OF CODEV</font>
                 
             </td>
             <td width="40%" style="border: 0px;" align="right">

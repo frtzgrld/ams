@@ -45,13 +45,13 @@
             <td style="border: 0px;" width="25%">
             </td>
             <td style="width: 5%; border: 0px;">
-                <img src="<?php echo $_SERVER['DOCUMENT_ROOT']?>/asset_management/assets/images/valencia.png" style="width: 70px; height: 65px; vertical-align: text-top">
+              
                 
             </td>
             <td style=" height: 50px; border: 0px;" align="center">
                 <font style="font-size: 13px; margin-top: -10px; margin-left: 0px; white-space:nowrap; ">Republic of the Philippines</font><br/>
-                <font style="font-size: 12px;  white-space:nowrap;">Province of Bukidnon</font><br/>
-                <font style="font-size: 13px;  white-space:nowrap;">CITY OF VALENCIA</font>
+                <font style="font-size: 12px;  white-space:nowrap;">NATIONAL CAPITAL REGION</font><br/>
+                <font style="font-size: 13px;  white-space:nowrap;">CITY OF Pasig</font>
                 
             </td>
             <td width="40%" style="border: 0px;" align="right">
@@ -69,7 +69,7 @@
     <table style="width:100%; height: 100px; border: 1px;">
         <tr>
             <td style="border: 1px;" align="center">
-                <font style="font-size: 13px; font-weight: bold; margin-top: -30px; margin-left: 0px; white-space:nowrap; vertical-align: top ">CITY GENERAL SERVICES OFFICE (CGSO)</font><br/>
+                <font style="font-size: 13px; font-weight: bold; margin-top: -30px; margin-left: 0px; white-space:nowrap; vertical-align: top ">COMPANY GENERAL SERVICES OFFICE (CGSO)</font><br/>
                 <font style="font-size: 16px; font-weight: bold; white-space:nowrap;">PROPERTY ACKNOWLEDGEMENT RECEIPT</font><br/>
             </td>
         </tr>
@@ -108,8 +108,8 @@
                 </td>
 
                 <td colspan="2" align="center" height="20%">
-                <font style="font-size: 13px;display: block; margin-top: 50px; font-weight: bold; text-decoration: underline;">VICKY LYN A. DURON</font><br/>
-                <font style="font-size: 13px;display: block; margin-top: 8px; text-decoration: underline;">City General Services Officer</font><br/>
+                <font style="font-size: 13px;display: block; margin-top: 50px; font-weight: bold; text-decoration: underline;"></font><br/>
+                <font style="font-size: 13px;display: block; margin-top: 8px; text-decoration: underline;"></font><br/>
                 <font style="font-size: 13px;display: block; margin-top: -8px;">Position</font>
 
                 <br/><br/>

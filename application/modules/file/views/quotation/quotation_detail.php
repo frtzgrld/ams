@@ -127,7 +127,7 @@
                     	<tr>
                     		<th colspan="8">Purpose: <?php echo $prs['PURPOSE']; ?></th>
                     	</tr>
-                        <tr class="table-eis">
+                        <tr class="table-ams">
                             <th width="05%">#</th>
                             <th width="20%">Item</th>
                             <th width="10%">Unit</th>

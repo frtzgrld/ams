@@ -102,4 +102,4 @@
 			    </div>
         	</form>
 
-	    	<script src="<?php echo base_url(); ?>assets/js/eis/form_quotation.js"></script>
+	    	<script src="<?php echo base_url(); ?>assets/js/ams/form_quotation.js"></script>

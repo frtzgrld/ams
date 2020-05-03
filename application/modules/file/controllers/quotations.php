@@ -135,7 +135,7 @@ class Quotations extends File {
         {
         	$ch = 5;
 	        $pdf->SetFont('Arial', 'B', 12);
-			$pdf->MultiCell($full, $ch, 'City Government of Valencia', '', 'C');
+			$pdf->MultiCell($full, $ch, 'City Government of CODEV', '', 'C');
 
 	        $pdf->SetFont('Arial', '', 14);
 			$pdf->MultiCell($full, $ch*3, 'Request for Quotation', '', 'C');

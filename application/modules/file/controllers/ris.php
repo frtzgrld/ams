@@ -21,21 +21,31 @@ Class RIS extends Main_Control
 			'submenu' 	=> 'ris',
 			'title'		=> $this->title,
 			'button'	=> null,
+			'offices'	=> $this->office_model->office_list(),
 		);
 
-		$this->get_view('ris/ris_index', $data);
+		$this->get_view(array('ris/ris_modal','ris/ris_index'), $data);
 	}
 
 	public function ris_new()
 	{
+		$ris = $this->ris_model->getrisno();
+		
+		// $ris_no = sprintf("%'.011d", $ris[0]['RIS_NO']);
+		$ris_no = substr($ris[0]['RIS_NO'], 4);
+		$risno = sprintf("%05d", intval($ris_no)+1);
+		$risno_final = $risno;
+		// var_dump($risno_final);
+		// exit();
 		$data = array(
 			'menu' 		=> 'file',
 			'submenu' 	=> 'ris',
 			'title'		=> $this->title,
 			'offices'	=> $this->office_model->office_list(),
 			'button'	=> null,
+			'risno'		=> $risno_final,
 		);
-
+		
 		$this->get_view('ris/ris_new', $data);
 	}
 
@@ -44,6 +54,7 @@ Class RIS extends Main_Control
 		$risid =  $this->uri->segment(4);
 		$ris_rec = $this->ris_model->get_ris_rec($risid);
 		// var_dump($ris_rec);
+		// exit();
 		
 		$data = array(
 			'menu' 		=> 'file',
@@ -51,35 +62,38 @@ Class RIS extends Main_Control
 			'title'		=> $this->title,
 			'offices'	=> $this->office_model->office_list(),
 			'button'	=> null,
-			'ris_id'	=> $risid,
+			'ris_id'	=> $ris_rec[0]['ID'],
 			'ris_items_list' => $this->ris_model->get_ris_item_list($risid),
 			'office_rec'	=> $ris_rec[0]['OFFICES'],
-			'ris_no'		=> $ris_rec[0]['RIS_NO'],
-			'requested_by'	=> $ris_rec[0]['REQUESTED_BY'],
-			'noted_by'		=> $ris_rec[0]['NOTED_BY'],
-			'approved_by'	=> $ris_rec[0]['APPROVED_BY'],
-			'issued_by'		=> $ris_rec[0]['ISSUED_BY'],
-			'received_by'	=> $ris_rec[0]['RECEIVED_BY'],
-			'posted_by'		=> $ris_rec[0]['POSTED_BY'],
+			'ris_no'		=> $risid,
+			// 'requested_by'	=> $ris_rec[0]['REQUESTED_BY'],
+			// 'noted_by'		=> $ris_rec[0]['NOTED_BY'],
+			// 'approved_by'	=> $ris_rec[0]['APPROVED_BY'],
+			// 'issued_by'		=> $ris_rec[0]['ISSUED_BY'],
+			// 'received_by'	=> $ris_rec[0]['RECEIVED_BY'],
+			// 'posted_by'		=> $ris_rec[0]['POSTED_BY'],
 			'requested_date'			=> date_format(date_create($ris_rec[0]['REQUESTED_DATE']), 'm/d/Y'),
-			
 		);
+		
 
 		$this->get_view('ris/ris_items', $data);
 	}
 
 	public function ris_header_save()
 	{
-		$this->db->insert('ris', array('offices' => $_POST['office'], 'ris_no' => $_POST['ris_no'], 'requested_by' => $_POST['requested_by'], 'requested_date' => $_POST['requested_date'], 'noted_by' => $_POST['noted_by'], 'approved_by'	=> $_POST['approved_by'], 'issued_by' => $_POST['issued_by'], 'received_by' => $_POST['received_by'], 'posted_by' => $_POST['posted_by'], 'createdby' => $this->session->userdata('USERID')));
+		$reqdate = date('Y-m-d',(strtotime($_POST['requested_date'])));
+	
+		$this->db->insert('ris', array('offices' => $_POST['office'], 'ris_no' => $_POST['ris_no'], 'requested_by' => $this->session->userdata('EMPLOYEENO'), 'requested_date' => $reqdate, 'createdby' => $this->session->userdata('EMPLOYEENO'), 'createddate' => date('Y-m-d h:i:s')));
 		$res_id = $this->db->insert_id();
 
-		redirect('file/ris/ris_items/'.$res_id);
+		redirect('file/ris/ris_items/'.$_POST['ris_no']);
 	}
 
 	public function datatable_ris_items()
 	{
-		if( $this->xhr() )
-        $results = $this->ris_model->fetch_datable_item_list();
+		$this->xhr();
+		$results = $this->ris_model->fetch_datable_item_list();
+		
         echo json_encode($results);
 	}
 
@@ -94,10 +108,22 @@ Class RIS extends Main_Control
 	{
 		$itemid = $this->input->post('item_id');
 		$ris_id = $this->input->post('ris_id'); 
+		// var_dump($ris_id);
+		// exit();
 		$itemlist = $this->ris_model->get_item($itemid);
 		
-		$results = $this->db->insert('ris_items', array('ris' => $ris_id, 'req_stock_no' => $itemlist[0]['code'], 'req_unit' => $itemlist[0]['unit'], 'req_description' => $itemlist[0]['id']));
-		echo json_encode($results);
+		$results = $this->db->insert('ris_items', array('ris_no' => $ris_id, 'req_stock_no' => $itemlist[0]['code'], 'req_unit' => $itemlist[0]['unit'], 'req_description' => $itemlist[0]['id']));
+		$data = "";
+		if($results)
+		{
+			$data=  array(
+				'result'    => 'success',
+				'header'    => 'SUCCESS',
+				'message'   => 'Requested Item has been successfully saved.',
+				'redirect'  => base_url().'file/ris/ris_items/'.$ris_id,
+			);
+		}
+		echo json_encode($data);
 	}
 
 	public function save_quantity()
@@ -106,6 +132,7 @@ Class RIS extends Main_Control
 		$rel_qty = $this->input->post('rel_qty');
 		$ris_id = $this->input->post('save_ris_id');
 		$risitemid = $this->input->post('ris_item_id');
+		$assigned_office = $this->input->post('save_office');
 
 		$data = array(
 			'req_qty'	=> $req_qty,
@@ -119,53 +146,115 @@ Class RIS extends Main_Control
 		$supplies = $this->ris_model->get_supplies($risitem_details[0]['REQ_DESCRIPTION']);
 		// var_dump($supplies);
 		// exit();
+
+		//2
 		$qty = $rel_qty;
+		//2
 		$remainingQty = $qty;
 		$currentQty = 0;
-
-		foreach ($supplies as $key) {
+		// $onqueue = $supplies[0]['ONQUEUE'];
+		foreach ($supplies as $k => $key) {
+			// var_dump($supplies[$k+1]['ID']);
+			// exit();
 			if($remainingQty <= 0)
 			{
 				break;
 			}
 
+				if($remainingQty > $key['QTYONHAND'])
+				{
+					$currentQty += $key['QTYONHAND']; //40
+					$remainingQty -= $key['QTYONHAND']; //2
 
-			if($remainingQty > $key['QTYONHAND'])
-			{
-				$currentQty += $key['QTYONHAND']; //40
-				$remainingQty -= $key['QTYONHAND']; //2
+					$tempqty = $remainingQty - $key['QTYONHAND'];
+					$data3 = array(
+						'QTYONHAND' => 0,
+						'ONQUEUE'	=> 0
+						);
+					$this->db->where('id', $key['ID']);
+					$this->db->update('supplies', $data3);
 
-				$tempqty = $released_qty - $key['QTYONHAND'];
-				$data3 = array(
-					'QTYONHAND' => 0,
-					'ONQUEUE'	=> 0
-					);
-				$this->db->where('id', $key['ID']);
-				$this->db->update('supplies', $data3);
-				// $released_qty = $tempqty;
-				// echo $released_qty;
-				// exit();
-			}
-			else
-			{
-				$tempCurrentQty = $currentQty; // 40
-				$tempRemainingQty = $remainingQty; //2
+					$this->db->insert('distribution', array(
+						'suppliesid' => $key['ID'], 
+						'assigned_qty' => $tempqty, 
+						'assigned_to_office' => $assigned_office, 
+						'assigned_by' => $this->session->userdata('EMPLOYEENO'), 
+						'assigned_date' => date('Y-m-d h:i:s'),
+						'datecreated' => date('Y-m-d h:i:s'),
+						'ris_items' => $risitemid
+					));
+					// $released_qty = $tempqty;
+					// echo $released_qty;
+					// exit();
+				}
+				else
+				{
+					$tempCurrentQty = $currentQty; // 40
+					$tempRemainingQty = $remainingQty; //2
 
-				$currentQty += $remainingQty; //42
-				$remainingQty = $currentQty - ($tempCurrentQty + $remainingQty);
+					$currentQty += $remainingQty; //42
+					$remainingQty = $currentQty - ($tempCurrentQty + $remainingQty);
 
-				$qty_onhand = $key['QTYONHAND'] - $released_qty;
+					$qty_onhand = intval($key['QTYONHAND']) - $remainingQty;
 
-				$data2 = array(
-					'QTYONHAND' => $qty_onhand - $tempRemainingQty,
-					'ONQUEUE'	=> 1,
-					);
-				$this->db->where('id', $key['ID']);
-				$this->db->update('supplies', $data2);
-				// $released_qty = 0;
-			}
+					$tmpqtyonhandsave = $qty_onhand - $tempRemainingQty;
+					// var_dump($qty_onhand - $tempRemainingQty);
+					// exit();
+					if($tmpqtyonhandsave == 0)
+					{
+					
+						$data2 = array(
+							'QTYONHAND' => 0,
+							'ONQUEUE'	=> 0,
+							);
+						$this->db->where('id', $key['ID']);
+						$this->db->update('supplies', $data2);
+
+						$dataarry = array(
+							'ONQUEUE'	=> 1,
+						);
+						$this->db->where('id', $supplies[$k+1]['ID']);
+						$this->db->update('supplies', $dataarry);
+
+						$this->db->insert('distribution', array(
+							'suppliesid' => $key['ID'], 
+							'assigned_qty' => $$qty_onhand, 
+							'assigned_to_office' => $assigned_office, 
+							'assigned_by' => $this->session->userdata('EMPLOYEENO'), 
+							'assigned_date' => date('Y-m-d h:i:s'),
+							'datecreated' => date('Y-m-d h:i:s'),
+							'ris_items' => $risitemid
+						));
+					}
+					else{
+						$data2 = array(
+							'QTYONHAND' => $qty_onhand - $tempRemainingQty,
+							'ONQUEUE'	=> 1,
+							);
+						$this->db->where('id', $key['ID']);
+						$this->db->update('supplies', $data2);
+
+						$this->db->insert('distribution', array(
+							'suppliesid' => $key['ID'], 
+							'assigned_qty' => $qty_onhand, 
+							'assigned_to_office' => $assigned_office, 
+							'assigned_by' => $this->session->userdata('EMPLOYEENO'), 
+							'assigned_date' => date('Y-m-d h:i:s'),
+							'datecreated' => date('Y-m-d h:i:s'),
+							'ris_items' => $risitemid
+						));
+
+
+					}
+				}
 		}
-
+		$risitemsdata = array(
+			'REQ_QTY' => $req_qty,
+			'ISSUED_QTY' => $rel_qty
+		);
+		$this->db->where('ID', $risitemid);
+		$this->db->update('ris_items', $data);
+		// exit();
 		redirect('file/ris/ris_items/'.$ris_id);
 	}
 
@@ -175,6 +264,14 @@ Class RIS extends Main_Control
 		$results = $this->ris_model->get_ris_item($ris_id);
 		// var_dump($results);
 		echo json_encode($results);
+	}
+
+	public function validate_ris()
+	{
+		$this->xhr();
+		$post_formdata = $this->input->post();
+        $results = $this->ris_model->manage_ris( $post_formdata );
+        echo json_encode($results);
 	}
 
 	public function print_ris()

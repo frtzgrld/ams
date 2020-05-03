@@ -282,7 +282,7 @@
     </div><!-- end col -->
 </div>
 
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/eis/validation_are.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/ams/validation_are.js"></script>
 <script type="text/javascript">
 $(document).ready(function () {
 

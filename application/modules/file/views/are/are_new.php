@@ -10,7 +10,7 @@
                 <div class="form-group">
                     
                     <div class="col-sm-12" align="center">
-                    <label class="control-label-center" for="description" style="font-size: 150%; text-decoration: underline">VALENCIA</label><br/>
+                    <label class="control-label-center" for="description" style="font-size: 150%; text-decoration: underline">CODEV</label><br/>
                     <label class="control-label-center" for="description">Agency</label>
                    
                     </div>
@@ -274,4 +274,4 @@
         </div>
     </div><!-- end col -->
 </div>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/eis/validation_are.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/ams/validation_are.js"></script>

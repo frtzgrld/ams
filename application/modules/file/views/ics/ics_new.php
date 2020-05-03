@@ -10,7 +10,7 @@
                 <div class="form-group">
                     
                     <div class="col-sm-12" align="center">
-                    <label class="control-label-center" for="description" style="font-size: 150%; text-decoration: underline">VALENCIA</label><br/>
+                    <label class="control-label-center" for="description" style="font-size: 150%; text-decoration: underline">CODEV</label><br/>
                     <label class="control-label-center" for="description">Agency</label>
                    
                     </div>
@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="col-sm-2" align="right">
-                        <label class="control-label-right" align="right">PAR No.<span class="text-danger">*</span></label>
+                        <label class="control-label-right" align="right">ICS No.<span class="text-danger">*</span></label>
                     </div>
                     
                     <div class="col-sm-3" for="createdby" align="left">

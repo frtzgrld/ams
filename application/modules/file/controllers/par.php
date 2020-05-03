@@ -53,7 +53,7 @@ Class PAR extends Main_Control
 	{
 		$this->db->insert('par', array('par_no' => $_POST['par_no'], 'fund_cluster' => $_POST['fund_cluster'], 'received_by'	=> $_POST['received_by'], 'received_by_position' => $_POST['received_by_position'], 'received_by_date'	=> date_format(date_create($_POST['received_by_date']), 'Y-m-d'), 'issued_by' => $_POST['issued_by'], 'issued_by_position' => $_POST['issued_by_position'], 'issued_by_date' => date_format(date_create($_POST['issued_by_date']), 'Y-m-d'), 'created_by' => $this->session->userdata('USERID'), 'status' => 0));
 
-		// $this->db->insert('par', array('fund_cluster' => $_POST['fund_cluster'], 'entity_name' => 'City of Valencia', 'created_by' => $this->session->userdata('USERID')));
+		// $this->db->insert('par', array('fund_cluster' => $_POST['fund_cluster'], 'entity_name' => 'City of CODEV', 'created_by' => $this->session->userdata('USERID')));
 
 		$res_id = $this->db->insert_id();
 
@@ -266,7 +266,7 @@ Class PAR extends Main_Control
 			$current_x += $full-140;
 			$pdf->SetXY($current_x, $current_y);
 
-			$pdf->MultiCell($full-100, $ch, 'VALENCIA', '', 'C');
+			$pdf->MultiCell($full-100, $ch, 'CODEV', '', 'C');
 			$current_x += $full-100;
 			$pdf->SetXY($current_x, $current_y);
 
